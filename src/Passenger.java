@@ -1,5 +1,4 @@
 public class Passenger {
-
     private String name;
     private String email;
     private String phoneNumber;
@@ -39,5 +38,13 @@ public class Passenger {
     }
     public String getGender() {
         return this.gender;
+    }
+
+    public Passenger (String Name, String Email, String PhoneNumber, String Gender, int Age) {
+        name = Name;
+        email = Email;
+        phoneNumber = PhoneNumber;
+        gender = Gender;
+        age = Age;
     }
 }
