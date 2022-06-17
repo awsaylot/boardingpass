@@ -2,8 +2,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,9 +36,24 @@ public class Main {
 //        System.out.println(passenger.getGender());
 //        System.out.println(passenger.getName());
 //        System.out.println(passenger.getPhoneNumber());
+
+        System.out.println("Enter your destination.");
+        String dest = scan.nextLine();
+
+        System.out.println("Enter your departure time");
+        int depart = scan.nextInt();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDateTime date = LocalDateTime.now();
+
+        BoardingTicket boardingTicket = new BoardingTicket(date.toString(), "ATLANTA", dest, depart, passenger);
+
+        createAFile();
     }
 
-    public void createAFile() {
+
+
+    public static void createAFile() {
         try {
             // set the path and create new file object
             String path = "boarding_pass.txt";
@@ -53,7 +71,7 @@ public class Main {
         }
     }
 
-    public void writeToAFile() throws IOException {
+    public void writeToAFile(BoardingTicket boardingTicket, Passenger passenger) throws IOException {
         Path boarding_pass_path = Path.of("boarding_pass.txt");
         //TODO have contents print out formatted boarding pass and information
         String content = "hello world";

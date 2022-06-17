@@ -1,6 +1,6 @@
 public class BoardingTicket {
     private String boardingPassNumber;
-    private int date;
+    private String date;
     private String origin;
     private String destination;
     private int departureTime;
@@ -8,7 +8,7 @@ public class BoardingTicket {
     private double arrivalTime;
     private final int price = 150;
 
-    public BoardingTicket(int date, String origin, String destination, int departureTime, Passenger passenger) {
+    public BoardingTicket(String date, String origin, String destination, int departureTime, Passenger passenger) {
         this.date = date;
         this.origin = origin;
         this.destination = destination;
@@ -62,10 +62,10 @@ public class BoardingTicket {
         return (rad * 180.0 / Math.PI);
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
-    public int getDate() {
+    public String getDate() {
         return date;
     }
     public void setOrigin(String origin) {
