@@ -2,12 +2,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Main {
 
@@ -17,28 +17,34 @@ public class Main {
     static boolean validPhoneNumber = false;
     static boolean validGender = false;
     public static void main(String[] args) {
+        //TODO Separate input validators into a different class to clean up main file
         String name = askName();
         int age = askAge();
         String email = askEmail();
         String phone_number = askPhoneNumber();
         String gender = askGender();
 
-//        System.out.println(name);
-//        System.out.println(age);
-//        System.out.println(email);
-//        System.out.println(phone_number);
-//        System.out.println(gender);
-
         // create new passenger
         Passenger passenger = new Passenger(name, email, phone_number, gender, age);
-//        System.out.println(passenger.getAge());
-//        System.out.println(passenger.getEmail());
-//        System.out.println(passenger.getGender());
-//        System.out.println(passenger.getName());
-//        System.out.println(passenger.getPhoneNumber());
+
+        //TODO Create input validators for destination and departure time
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your destination.");
+        String dest = scan.nextLine();
+
+        System.out.println("Enter your departure time");
+        int depart = scan.nextInt();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDateTime date = LocalDateTime.now();
+
+        BoardingTicket boardingTicket = new BoardingTicket(date.toString(), "ATLANTA", dest, depart, passenger);
+        createAFile();
     }
 
-    public void createAFile() {
+
+
+    public static void createAFile() {
         try {
             // set the path and create new file object
             String path = "boarding_pass.txt";
@@ -56,7 +62,7 @@ public class Main {
         }
     }
 
-    public void writeToAFile() throws IOException {
+    public void writeToAFile(BoardingTicket boardingTicket, Passenger passenger) throws IOException {
         Path boarding_pass_path = Path.of("boarding_pass.txt");
         //TODO have contents print out formatted boarding pass and information
         String content = "hello world";
